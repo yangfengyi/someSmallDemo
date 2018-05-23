@@ -5,10 +5,10 @@
 var oInput = document.getElementsByTagName('input')[0],
 	oUl = document.getElementsByTagName('ul')[0];
 
-oInput.oninput = function () {
+oInput.oninput = debounce(function () {
 	var value = this.value;
 	getData(value);
-}
+}, 1000);
 
 function getData(value) {
 	var oScript = document.createElement('script');
@@ -33,6 +33,19 @@ function doJson(data) {
 	} else {
 		oUl.style.display = "none";
 	}
+}
+
+// 防抖函数
+function debounce(handler, delay) {
+    var timer = null;
+    return function () {
+        var _self = this;	// 保存this
+        var arg = arguments;	// 保存e
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            handler.apply(_self, arg);
+        }, delay);
+    }
 }
 
 
