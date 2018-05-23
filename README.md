@@ -1,2 +1,5 @@
 # someSmallDemo
-some small demo for study life
+### 记录一些学习中的小demo
+
+1. drag：通过drag函数实现拖拽，通过cookie记录每一个拖拽的位置，下一次打开页面的时候方位的位置由cookie里面存放的值来决定
+
