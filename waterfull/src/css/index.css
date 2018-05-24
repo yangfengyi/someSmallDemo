@@ -1,0 +1,38 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0;
+}
+.wrapper {
+	width: 80%;
+	min-width: 950px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	/*控制ul的居中*/
+	text-align: center;
+}
+.wrapper .box {
+	display: inline-block;
+}
+.wrapper .box li {
+	float: left;
+	width: 25%;
+}
+.wrapper .box li .item {
+	width: 200px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	/*margin塌陷了解一下*/
+	margin: 0 5px 10px;
+}
+.wrapper .box li .item .img-box {
+	width: 100%;
+}
+.wrapper .box li .item img {
+	width: 100%;
+}
+.wrapper .box li .item p{
+	font-size: 16px;
+}
