@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+window.addEventListener('devicemotion', deviceMotionHandler, false);
+var SHAKE_THERSHOLD = 800;  // 假定的加速度的变化速度乘以10000可以算作是摇动了手
+var last_updata = 0;
+var x,
+    y,
+    z,
+    last_x,
+    last_y,
+    last_z;
+function deviceMotionHandler(eventData) {
+    var acceleration = eventData.accelerationIncludingGravity;
+    var curTime = new Date().getTime();
+    if(( curTime - last_updata ) > 300) {   // 这里的防抖函数作用一样,避免事件一直触发，损耗性能
+        var diffTime = curTime - last_updata;   // 加速度变化的时间
+        last_updata = curTime;
+        x = acceleration.x;
+        y = acceleration.y;
+        z = acceleration.z;
+        
+        // 通过加速度的变化,和时间戳的关系来计算这段事件加速度的变化速度，如果比我们测试的加速度变化速度大我们则认为这里的用户确实是摇动了手机，再做之后的操作。
+        var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+        if(speed > SHAKE_THERSHOLD) {
+            alert('you have shaked!');
+            var div = document.createElement('div');
+            div.innerHTML = "you have get a friend";
+            document.body.appendChild(div);
+        }
+        last_x = x;
+        last_y = y;
+        last_z = z;
+    }
+}
+    </script>
+</body>
+</html>
